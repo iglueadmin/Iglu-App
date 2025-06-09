@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Iglu Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 2em 1em;
+      gap: 2em;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      padding: 1em 2em;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #00FFFF, #00cfd1);
+      box-shadow: 0 0 15px #00FFFF;
+      width: 100%;
+      max-width: 900px;
+      user-select: none;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 3px white;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .header-text {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      animation: glowMove 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove {
+      0% {
+        text-shadow: 0 0 8px #fff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+      50% {
+        text-shadow: 0 0 12px #a0f7ff, 0 0 25px #a0f7ff, 0 0 40px #a0f7ff;
+      }
+      100% {
+        text-shadow: 0 0 8px #fff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+    }
+
+    .main-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+      width: 100%;
+      max-width: 600px;
+      margin-top: 3em;
+    }
+
+    .glow-button {
+      display: block;
+      padding: 1.5em;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 15px;
+      text-decoration: none;
+      background: linear-gradient(90deg, #00FFFF, #00cfd1);
+      color: white;
+      box-shadow: 0 0 20px #00ffff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glow-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 30px #00ffff, 0 0 40px #00cfd1;
+    }
+
+    @media (max-width: 600px) {
+      .header-text {
+        font-size: 2.5rem;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .glow-button {
+        font-size: 1.2rem;
+        padding: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-HMxVQRNPTRZkJrCs8DkfTY2Oli9YHLx9Jg&s" alt="Iglu Logo">
+    </div>
+    <div class="header-text">IGLU</div>
+  </header>
+
+  <div class="main-buttons">
+    <a class="glow-button" href="https://iglueadmin.github.io/Iglu-Salapungan-Sales/" target="_blank">
+      Iglu Salapungan Sales
+    </a>
+    <a class="glow-button" href="https://iglueadmin.github.io/Iglu-Employees-Timelogs/" target="_blank">
+      Iglu Employee Timelogs
+    </a>
+  </div>
+
+</body>
+</html>
