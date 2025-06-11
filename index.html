@@ -2,48 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Iglu Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iglu Management App</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=open-sauce-one@400,700&display=swap" rel="stylesheet" />
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Open Sauce One', sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f8f8;
-      color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       min-height: 100vh;
+      background: url('https://github.com/user-attachments/assets/bc5acca3-30fc-451b-ae1d-15e2ad957ff0') no-repeat center/cover fixed;
+      color: #fff;
+      text-align: center;
       padding: 2em 1em;
-      gap: 2em;
+      position: relative;
+    }
+
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
     }
 
     header {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 1em;
       padding: 1em 2em;
-      border-radius: 20px;
       background: linear-gradient(90deg, #00FFFF, #00cfd1);
       box-shadow: 0 0 15px #00FFFF;
-      width: 100%;
-      max-width: 900px;
-      user-select: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
     }
 
     .logo {
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      box-shadow: 0 0 8px 3px white;
       overflow: hidden;
-      flex-shrink: 0;
+      box-shadow: 0 0 8px 3px white;
     }
 
     .logo img {
@@ -53,88 +63,172 @@
     }
 
     .header-text {
-      font-size: 3.5rem;
-      font-weight: 900;
+      font-size: 2rem;
+      font-weight: 700;
       color: #fff;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      animation: glowMove 3s ease-in-out infinite alternate;
+      letter-spacing: 0.1em;
     }
 
-    @keyframes glowMove {
-      0% {
-        text-shadow: 0 0 8px #fff, 0 0 20px #00ffff, 0 0 30px #00ffff;
-      }
-      50% {
-        text-shadow: 0 0 12px #a0f7ff, 0 0 25px #a0f7ff, 0 0 40px #a0f7ff;
-      }
-      100% {
-        text-shadow: 0 0 8px #fff, 0 0 20px #00ffff, 0 0 30px #00ffff;
-      }
+    .panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2em;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+      margin-top: 7em;
+      width: 100%;
+      max-width: 480px;
     }
 
-    .main-buttons {
+    .panel h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1em;
+      color: #0ff;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1rem;
+      margin-bottom: 1em;
+      border-radius: 10px;
+      border: 2px solid #0ff;
+      background: rgba(255, 255, 255, 0.95);
+      color: #003d3d;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #0ff, #0cfd1);
+      color: #003d3d;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 12px rgba(0, 255, 255, 0.6);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px rgba(0, 255, 255, 0.8);
+    }
+
+    #response {
+      margin-top: 1em;
+      font-size: 1rem;
+      font-weight: bold;
+      min-height: 1.5em;
+      color: #f88;
+    }
+
+    .modules {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5em;
+      margin-top: 7em;
+    }
+
+    .modules h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1em;
+      color: #0ff;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    .module-button {
+      background: none;
+      border: none;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
-      gap: 2em;
-      width: 100%;
-      max-width: 600px;
-      margin-top: 3em;
+      align-items: center;
+      gap: 0.5em;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 4px #000;
+      transition: transform 0.3s;
     }
 
-    .glow-button {
-      display: block;
-      padding: 1.5em;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      border-radius: 15px;
-      text-decoration: none;
-      background: linear-gradient(90deg, #00FFFF, #00cfd1);
-      color: white;
-      box-shadow: 0 0 20px #00ffff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .module-button img {
+      width: 140px;
+      height: 140px;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+      background: #fff;
     }
 
-    .glow-button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 30px #00ffff, 0 0 40px #00cfd1;
+    .module-button:hover {
+      transform: scale(1.05);
     }
 
     @media (max-width: 600px) {
+      .module-button img {
+        width: 100px;
+        height: 100px;
+      }
+
       .header-text {
-        font-size: 2.5rem;
+        font-size: 1.4rem;
       }
 
-      .logo {
-        width: 50px;
-        height: 50px;
-      }
-
-      .glow-button {
-        font-size: 1.2rem;
-        padding: 1.2em;
+      .modules h1,
+      .panel h1 {
+        font-size: 1.4rem;
       }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-HMxVQRNPTRZkJrCs8DkfTY2Oli9YHLx9Jg&s" alt="Iglu Logo">
     </div>
-    <div class="header-text">IGLU</div>
+    <div class="header-text">Iglu App</div>
   </header>
 
-  <div class="main-buttons">
-    <a class="glow-button" href="https://iglueadmin.github.io/Iglu-Salapungan-Sales/" target="_blank">
-      Iglu Salapungan Cashier
-    </a>
-    <a class="glow-button" href="https://iglueadmin.github.io/Iglu-Employees-Timelogs/" target="_blank">
-      Iglu Employee Timelogs
-    </a>
+  <!-- Login Panel -->
+  <div class="panel" id="login-panel">
+    <h1>Welcome to Iglu Management App</h1>
+    <input type="text" id="branch" placeholder="Enter Branch Name">
+    <input type="password" id="code" placeholder="Enter Access Code">
+    <button onclick="validateLogin()">Proceed</button>
+    <div id="response"></div>
   </div>
 
+  <!-- Module Selector -->
+  <div class="modules" id="module-panel">
+    <h1>Select a Module to Access:</h1>
+    <button class="module-button" onclick="location.href='https://iglueadmin.github.io/Iglu-Salapungan-Cashier-System/'">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReZ38mpZrSioMP_Y3HgXIh-igYQbYH7S7IPQ&s" alt="Cashier Logo">
+      Iglu - Salapungan Cashier System
+    </button>
+    <button class="module-button" onclick="location.href='https://iglueadmin.github.io/Iglu-Employees-Timelogs/'">
+      <img src="https://play-lh.googleusercontent.com/Jc6X6KwBvwwjGGuE52tYF1_8llO4pDJEmm9Veyc-ROBmhKzJyt-hGUBGCIE0jcEU-hY=w240-h480-rw" alt="Timelogs Logo">
+      Iglu Employee Time Tracker
+    </button>
+  </div>
+
+  <script>
+    function validateLogin() {
+      const branch = document.getElementById('branch').value.trim().toLowerCase();
+      const code = document.getElementById('code').value.trim();
+      const response = document.getElementById('response');
+
+      if (branch === 'salapungan' && code === '5pg0m32') {
+        document.getElementById('login-panel').style.display = 'none';
+        document.getElementById('module-panel').style.display = 'flex';
+      } else {
+        response.textContent = 'No matches';
+      }
+    }
+  </script>
 </body>
 </html>
